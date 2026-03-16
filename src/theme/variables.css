@@ -1,0 +1,153 @@
+/* Al Día – Tema principal (azul) */
+
+:root {
+  /* Color primario: azul */
+  --ion-color-primary: #1e5fba;
+  --ion-color-primary-rgb: 30, 95, 186;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1a54a4;
+  --ion-color-primary-tint: #356fc1;
+
+  /* Secundario (acento) */
+  --ion-color-secondary: #0ea5e9;
+  --ion-color-secondary-rgb: 14, 165, 233;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #0c91cd;
+  --ion-color-secondary-tint: #26aeeb;
+
+  /* Fondo y texto */
+  --ion-background-color: #f0f4fa;
+  --ion-background-color-rgb: 240, 244, 250;
+  --ion-text-color: #1e293b;
+  --ion-text-color-rgb: 30, 41, 59;
+
+  /* Toolbar */
+  --ion-toolbar-background: var(--ion-color-primary);
+  --ion-toolbar-border-color: var(--ion-color-primary-shade);
+  --ion-toolbar-color: var(--ion-color-primary-contrast);
+
+  /* Tab bar */
+  --ion-tab-bar-background: #ffffff;
+  --ion-tab-bar-border-color: rgba(0, 0, 0, 0.08);
+  --ion-tab-bar-color: #64748b;
+  --ion-tab-bar-color-selected: var(--ion-color-primary);
+
+  /* Cards */
+  --ion-card-background: #ffffff;
+  --ion-card-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  /* Items */
+  --ion-item-background: #ffffff;
+  --ion-item-border-color: rgba(0, 0, 0, 0.06);
+
+  /* Fuente */
+  --ion-font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+/* Contenedor tipo “web” en pantallas grandes */
+@media (min-width: 768px) {
+  .content-wrap {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  ion-tab-bar {
+    width: 100%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Toolbar con color primario */
+ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+  --border-color: transparent;
+}
+
+/* Cards con un poco más de personalidad */
+ion-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(30, 95, 186, 0.08);
+}
+
+ion-card-content {
+  padding: 16px 20px;
+}
+
+/* Botones y enlaces como cards en Home */
+.link-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  background: var(--ion-card-background);
+  box-shadow: 0 2px 8px rgba(30, 95, 186, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(30, 95, 186, 0.12);
+}
+
+.link-card:active {
+  transform: translateY(0);
+}
+
+.link-card strong {
+  color: var(--ion-color-primary);
+  font-size: 1.05rem;
+}
+
+.link-card p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--ion-text-color);
+  opacity: 0.85;
+}
+
+/* Títulos de página */
+ion-content h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
+  margin: 0 0 8px;
+}
+
+ion-content h1 + p {
+  color: var(--ion-text-color);
+  opacity: 0.8;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+/* Ajuste general del body */
+body {
+  margin: 0;
+  font-family: var(--ion-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Segment: indicador y texto seleccionado en primario */
+ion-segment ion-segment-button.segment-button-checked {
+  --color: var(--ion-color-primary);
+  --color-checked: var(--ion-color-primary);
+  --indicator-color: var(--ion-color-primary);
+}
