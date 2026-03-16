@@ -7,18 +7,42 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies y build
 node_modules
 dist
 dist-ssr
 *.local
+
+# Environment (API keys, config local)
+.env
+.env.local
+.env.*.local
+
+# Firebase
+.firebase/
+firebase-debug.log*
+firestore-debug.log*
+ui-debug.log*
+*.cache
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Capacitor (builds nativos; descomentar si no querés versionar)
+# android/
+# ios/
