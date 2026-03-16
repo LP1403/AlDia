@@ -1,0 +1,20 @@
+---
+description: Contexto del proyecto Al Día (app dinero día a día para Argentina)
+alwaysApply: true
+---
+
+# Proyecto Al Día
+
+**Producto:** Herramientas cotidianas para Argentina: cotizador dólar (blue, MEP, CCL, oficial), "cuánto vale en pesos", dividir cuenta + propina, calculadora de alquiler, próximo aumento ICL.
+
+**Stack:** React + Vite + TypeScript. UI: Ionic React. Hosting: Firebase (`aldia-ee57e`). Capacitor listo para app nativa. Sin backend en v0: APIs públicas desde el navegador, cache en cliente.
+
+**APIs:** DolarAPI.com (`/v1/dolares`), cache ~5 min. ICL alquiler: BCRA serie 7988, cache 24h; fallback en `src/data/indicesIclFallback.json`.
+
+**Estructura:** `src/pages/` (Home, Dolar, CuantoVale, CuentaPropina, Alquiler, AumentoAlquiler), `src/hooks/`, `src/services/`, `src/theme/variables.css`. Rutas: `/`, `/dolar`, `/cuanto-vale`, `/cuenta`, `/alquiler`, `/aumento-alquiler`.
+
+**Tema:** Primario `#1e5fba`, fondo `#f0f4fa`. Toolbar primario, tab bar blanco. Desktop: `.content-wrap` max-width 640px centrado.
+
+**Comandos:** `npm run dev`, `npm run build`, `npm run deploy` (Firebase).
+
+Para contexto completo (plan v0, decisiones, lo no implementado), consultar **CONTEXTO-AL-DIA.md** en la raíz del repo.
