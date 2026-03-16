@@ -6,12 +6,12 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonButtons,
+  IonButton,
   IonSegment,
   IonSegmentButton,
   IonLabel,
   IonInput,
-  IonItem,
-  IonButton,
   IonCard,
   IonCardContent,
   IonListHeader,
@@ -42,13 +42,15 @@ const CuentaPropina = () => {
     PROPINAS_PORCENTAJE,
   } = useCuenta(
     params.total ?? 0,
-    params.modo
+    params.modo,
+    params.personas ?? 1
   )
 
   useEffect(() => {
     if (params.total != null && params.total > 0) setTotal(params.total)
     if (params.propinaPct != null) setPropinaPct(params.propinaPct)
-  }, [params.total, params.propinaPct])
+    if (params.personas != null && params.personas > 0) setPartesIguales(params.personas)
+  }, [params.total, params.propinaPct, params.personas])
 
   const handleShare = () => {
     const url = shareUrl()
@@ -61,6 +63,11 @@ const CuentaPropina = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton routerLink="/" fill="clear" className="toolbar-home-btn">
+              ← Inicio
+            </IonButton>
+          </IonButtons>
           <IonTitle>Cuenta / Propina</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -77,8 +84,8 @@ const CuentaPropina = () => {
           </IonSegmentButton>
         </IonSegment>
 
-        <IonItem>
-          <IonLabel>Total (ARS)</IonLabel>
+        <div className="form-field">
+          <label>Total (ARS)</label>
           <IonInput
             type="number"
             inputMode="decimal"
@@ -86,12 +93,12 @@ const CuentaPropina = () => {
             onIonInput={(e) => setTotal(parseFloat((e.detail.value as string) ?? '0') || 0)}
             placeholder="0"
           />
-        </IonItem>
+        </div>
 
         {modo === 'cuenta' && (
           <>
-            <IonItem>
-              <IonLabel>Partes iguales (personas)</IonLabel>
+            <div className="form-field">
+              <label>Partes iguales (personas)</label>
               <IonInput
                 type="number"
                 inputMode="numeric"
@@ -101,7 +108,7 @@ const CuentaPropina = () => {
                   setPartesIguales(Math.max(1, parseInt((e.detail.value as string) ?? '1', 10) || 1))
                 }
               />
-            </IonItem>
+            </div>
             {total > 0 && partesIguales > 0 && (
               <IonCard>
                 <IonCardContent>

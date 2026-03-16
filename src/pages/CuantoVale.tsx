@@ -6,9 +6,9 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonButtons,
+  IonButton,
   IonInput,
-  IonItem,
-  IonLabel,
   IonCard,
   IonCardContent,
   IonSpinner,
@@ -41,6 +41,11 @@ const CuantoVale = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton routerLink="/" fill="clear" className="toolbar-home-btn">
+              ← Inicio
+            </IonButton>
+          </IonButtons>
           <IonTitle>Cuánto vale en pesos</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -49,8 +54,8 @@ const CuantoVale = () => {
         <h1>Cuánto vale en pesos</h1>
         <p>Ingresá un precio en dólares y ves el equivalente en pesos (blue, MEP, tarjeta).</p>
 
-        <IonItem>
-          <IonLabel>Precio en USD</IonLabel>
+        <div className="form-field">
+          <label>Precio en USD</label>
           <IonInput
             type="text"
             inputMode="decimal"
@@ -58,7 +63,7 @@ const CuantoVale = () => {
             onIonInput={(e) => setUsd(e.detail.value ?? '')}
             placeholder="0"
           />
-        </IonItem>
+        </div>
 
         {loading && <IonSpinner name="crescent" />}
         {error && <IonNote color="danger">{error}</IonNote>}

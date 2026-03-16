@@ -6,9 +6,9 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonButtons,
+  IonButton,
   IonInput,
-  IonItem,
-  IonLabel,
   IonCard,
   IonCardContent,
 } from '@ionic/react'
@@ -42,6 +42,11 @@ const Alquiler = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton routerLink="/" fill="clear" className="toolbar-home-btn">
+              ← Inicio
+            </IonButton>
+          </IonButtons>
           <IonTitle>Alquiler</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -50,8 +55,8 @@ const Alquiler = () => {
         <h1>Calculadora de alquiler</h1>
         <p>Ingresos mensuales y % que podés destinar al alquiler. Te mostramos el máximo a pagar y cuánto te queda.</p>
 
-        <IonItem>
-          <IonLabel>Ingresos mensuales (ARS)</IonLabel>
+        <div className="form-field">
+          <label>Ingresos mensuales (ARS)</label>
           <IonInput
             type="text"
             inputMode="decimal"
@@ -59,10 +64,10 @@ const Alquiler = () => {
             onIonInput={(e) => setIngresos(e.detail.value ?? '')}
             placeholder="0"
           />
-        </IonItem>
+        </div>
 
-        <IonItem>
-          <IonLabel>% para alquiler</IonLabel>
+        <div className="form-field">
+          <label>% para alquiler</label>
           <IonInput
             type="number"
             inputMode="numeric"
@@ -73,18 +78,19 @@ const Alquiler = () => {
               setPorcentaje(Math.min(100, Math.max(0, parseInt((e.detail.value as string) ?? '30', 10) || 30)))
             }
           />
-        </IonItem>
-        <IonItem lines="none">
+        </div>
+        <div className="form-options">
           {PORCENTAJE_OPCIONES.map((p) => (
-            <IonLabel
+            <button
               key={p}
-              style={{ marginRight: 12, cursor: 'pointer' }}
+              type="button"
+              className={porcentaje === p ? 'form-options__btn form-options__btn--active' : 'form-options__btn'}
               onClick={() => setPorcentaje(p)}
             >
               {p}%
-            </IonLabel>
+            </button>
           ))}
-        </IonItem>
+        </div>
 
         {maxAlquiler != null && maxAlquiler > 0 && (
           <IonCard>

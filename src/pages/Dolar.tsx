@@ -6,10 +6,10 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonButtons,
+  IonButton,
   IonSelect,
   IonSelectOption,
-  IonItem,
-  IonLabel,
   IonInput,
   IonCard,
   IonCardContent,
@@ -44,6 +44,11 @@ const Dolar = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton routerLink="/" fill="clear" className="toolbar-home-btn">
+              ← Inicio
+            </IonButton>
+          </IonButtons>
           <IonTitle>Dólar</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -51,8 +56,8 @@ const Dolar = () => {
         <div className="content-wrap">
         <h1>Cotizador dólar</h1>
 
-        <IonItem>
-          <IonLabel>Tipo</IonLabel>
+        <div className="form-field">
+          <label>Tipo</label>
           <IonSelect
             value={tipo}
             onIonChange={(e) => setTipo(e.detail.value as TipoDolar)}
@@ -64,19 +69,17 @@ const Dolar = () => {
               </IonSelectOption>
             ))}
           </IonSelect>
-        </IonItem>
+        </div>
 
         {loading && <IonSpinner name="crescent" />}
         {error && <IonNote color="danger">{error}</IonNote>}
 
         {cotizacion && !loading && (
           <>
-            <IonItem>
-              <IonLabel>1 USD = {formatNum(cotizacion.venta)} ARS (venta)</IonLabel>
-            </IonItem>
+            <p className="form-info">1 USD = {formatNum(cotizacion.venta)} ARS (venta)</p>
 
-            <IonItem>
-              <IonLabel>{esArs ? 'Pesos (ARS)' : 'Dólares (USD)'}</IonLabel>
+            <div className="form-field">
+              <label>{esArs ? 'Pesos (ARS)' : 'Dólares (USD)'}</label>
               <IonInput
                 type="text"
                 inputMode="decimal"
@@ -84,10 +87,10 @@ const Dolar = () => {
                 onIonInput={(e) => setMonto(e.detail.value ?? '')}
                 placeholder={esArs ? '0' : '0'}
               />
-            </IonItem>
-            <IonItem button onClick={() => setEsArs((v) => !v)}>
-              <IonLabel>Cambiar a {esArs ? 'USD' : 'ARS'}</IonLabel>
-            </IonItem>
+            </div>
+            <IonButton fill="outline" onClick={() => setEsArs((v) => !v)} className="ion-margin-top">
+              Cambiar a {esArs ? 'USD' : 'ARS'}
+            </IonButton>
 
             {convertido !== null && (
               <IonCard>

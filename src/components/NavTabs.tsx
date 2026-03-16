@@ -13,7 +13,7 @@ const TABS = [
 export default function NavTabs() {
   const location = useLocation()
   return (
-    <IonTabBar slot="bottom">
+    <IonTabBar slot="top" className="nav-tabs">
       {TABS.map(({ path, label }) => (
         <IonTabButton key={path} tab={path} href={path} selected={location.pathname === path}>
           <IonLabel>{label}</IonLabel>

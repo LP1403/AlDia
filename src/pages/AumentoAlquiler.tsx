@@ -6,9 +6,9 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonButtons,
+  IonButton,
   IonInput,
-  IonItem,
-  IonLabel,
   IonCard,
   IonCardContent,
   IonSpinner,
@@ -80,6 +80,11 @@ const AumentoAlquiler = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton routerLink="/" fill="clear" className="toolbar-home-btn">
+              ← Inicio
+            </IonButton>
+          </IonButtons>
           <IonTitle>Próximo aumento</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -88,8 +93,8 @@ const AumentoAlquiler = () => {
         <h1>Calculadora próximo aumento de alquiler</h1>
         <p>Monto actual, fecha de contrato (o último ajuste). Índice ICL (Ley 27.551).</p>
 
-        <IonItem>
-          <IonLabel>Alquiler actual (ARS/mes)</IonLabel>
+        <div className="form-field">
+          <label>Alquiler actual (ARS/mes)</label>
           <IonInput
             type="text"
             inputMode="decimal"
@@ -97,16 +102,16 @@ const AumentoAlquiler = () => {
             onIonInput={(e) => setMontoActual(e.detail.value ?? '')}
             placeholder="0"
           />
-        </IonItem>
+        </div>
 
-        <IonItem>
-          <IonLabel>Fecha inicio contrato o último ajuste</IonLabel>
+        <div className="form-field">
+          <label>Fecha inicio contrato o último ajuste</label>
           <IonInput
             type="date"
             value={fechaContrato}
             onIonInput={(e) => setFechaContrato((e.detail.value as string) ?? '')}
           />
-        </IonItem>
+        </div>
 
         {loading && <IonSpinner name="crescent" />}
         {error && <IonNote color="danger">{error}</IonNote>}

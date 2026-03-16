@@ -19,22 +19,29 @@ export function useCuentaParams(search: string) {
   const params = new URLSearchParams(search)
   const totalStr = params.get('total')
   const propinaStr = params.get('propina')
+  const personasStr = params.get('personas')
   const modo = (params.get('modo') === 'propina' ? 'propina' : 'cuenta') as ModoCuenta
-  const itemsStr = params.get('items') // "nombre1:monto1,nombre2:monto2" or for equal parts just total
+  const itemsStr = params.get('items')
+  const personas = personasStr != null ? Math.max(1, parseInt(personasStr, 10) || 1) : null
   return {
     total: totalStr != null ? parseFloatSafe(totalStr) : null,
     propinaPct: propinaStr != null ? parseFloatSafe(propinaStr) : null,
+    personas,
     modo,
     itemsStr: itemsStr ?? null,
   }
 }
 
-export function useCuenta(initialTotal = 0, initialModo: ModoCuenta = 'cuenta') {
+export function useCuenta(
+  initialTotal = 0,
+  initialModo: ModoCuenta = 'cuenta',
+  initialPartesIguales = 1
+) {
   const [modo, setModo] = useState<ModoCuenta>(initialModo)
   const [total, setTotal] = useState(initialTotal)
   const [items, setItems] = useState<ItemCuenta[]>([])
   const [propinaPct, setPropinaPct] = useState(15)
-  const [partesIguales, setPartesIguales] = useState(1)
+  const [partesIguales, setPartesIguales] = useState(initialPartesIguales)
 
   const totalItems = items.reduce((s, i) => s + i.monto, 0)
   const propinaMonto = modo === 'propina' ? (total * propinaPct) / 100 : 0
@@ -75,7 +82,8 @@ export function useCuenta(initialTotal = 0, initialModo: ModoCuenta = 'cuenta') 
       )
     }
     if (modo === 'cuenta' && partesIguales > 0) params.set('personas', String(partesIguales))
-    return `${window.location.origin}${window.location.pathname}?${params.toString()}`
+    const base = window.location.origin
+    return `${base}/cuenta?${params.toString()}`
   }, [total, modo, propinaPct, items, partesIguales])
 
   return {

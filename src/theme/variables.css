@@ -33,6 +33,7 @@
   --ion-tab-bar-border-color: rgba(0, 0, 0, 0.08);
   --ion-tab-bar-color: #64748b;
   --ion-tab-bar-color-selected: var(--ion-color-primary);
+  --nav-tab-indicator: var(--ion-color-primary);
 
   /* Cards */
   --ion-card-background: #ffffff;
@@ -46,7 +47,28 @@
   --ion-font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
-/* Contenedor tipo “web” en pantallas grandes */
+/* Barra de navegación siempre arriba (web común) */
+ion-tab-bar.nav-tabs {
+  border-top: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+ion-tab-bar.nav-tabs ion-tab-button {
+  font-size: 0.85rem;
+  font-weight: 500;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
+
+ion-tab-bar.nav-tabs ion-tab-button.tab-selected {
+  color: var(--ion-color-primary);
+  border-bottom: 2px solid var(--ion-color-primary);
+  margin-bottom: -1px;
+}
+
 @media (min-width: 768px) {
   .content-wrap {
     max-width: 640px;
@@ -55,16 +77,161 @@
     width: 100%;
   }
 
-  ion-tab-bar {
-    width: 100%;
+  ion-tab-bar.nav-tabs {
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 12px 12px 0 0;
-    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 0 0 12px 12px;
   }
+}
+
+/* Campos de formulario: label arriba, input abajo con espacio */
+.form-field {
+  margin-bottom: 1.25rem;
+}
+
+.form-field__label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ion-text-color);
+  margin-bottom: 0.5rem;
+}
+
+.form-field ion-input,
+.form-field .form-field__input-wrapper {
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  min-height: 48px;
+}
+
+.form-field ion-input {
+  margin-top: 0;
+}
+
+.form-field ion-input.input-highlighted,
+.form-field ion-input.ion-focused {
+  border-color: var(--ion-color-primary);
+  box-shadow: 0 0 0 2px rgba(30, 95, 186, 0.2);
+}
+
+/* IonItem como form-field (label arriba) */
+ion-item.form-field-stacked {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --min-height: auto;
+  --border-width: 0;
+  margin-bottom: 1.25rem;
+}
+
+ion-item.form-field-stacked::part(native) {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+ion-item.form-field-stacked .item-inner {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+ion-item.form-field-stacked ion-label {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transform: none;
+  flex: none;
+  max-width: 100%;
+}
+
+ion-item.form-field-stacked ion-input,
+ion-item.form-field-stacked ion-select {
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  margin-top: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+ion-item.form-field-stacked ion-select {
+  min-height: 48px;
+}
+
+/* Form field con div (label + input separados) */
+.form-field + .form-field {
+  margin-top: 1.25rem;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ion-text-color);
+  margin-bottom: 0.5rem;
+}
+
+.form-field ion-input,
+.form-field ion-select {
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  width: 100%;
+}
+
+.form-field ion-select {
+  min-height: 48px;
+}
+
+.form-info {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--ion-text-color);
+  opacity: 0.9;
+}
+
+.form-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+
+.form-options__btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ion-color-primary);
+  background: #fff;
+  border: 1px solid rgba(30, 95, 186, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.form-options__btn:hover {
+  background: rgba(30, 95, 186, 0.06);
+}
+
+.form-options__btn--active {
+  background: var(--ion-color-primary);
+  color: #fff;
+  border-color: var(--ion-color-primary);
 }
 
 /* Toolbar con color primario */
@@ -72,6 +239,13 @@ ion-toolbar {
   --background: var(--ion-color-primary);
   --color: var(--ion-color-primary-contrast);
   --border-color: transparent;
+}
+
+/* Botón Inicio en toolbar: visible sobre fondo azul */
+.toolbar-home-btn {
+  --color: var(--ion-color-primary-contrast);
+  font-weight: 500;
+  margin-left: 4px;
 }
 
 /* Cards con un poco más de personalidad */
