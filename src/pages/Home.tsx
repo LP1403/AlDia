@@ -16,8 +16,8 @@ const Home = () => {
     <IonPage>
       <IonContent className="ion-padding">
         <div className="content-wrap">
-          <h1>Al Día</h1>
-          <p>Herramientas de uso cotidiano: dólar, cuenta, propina, alquiler.</p>
+          <h1 className="home-title">Al Día</h1>
+          <p className="content-intro">Herramientas de uso cotidiano: dólar, cuenta, propina, alquiler.</p>
           <div style={{ marginTop: 24 }}>
             {TOOLS.map(({ to, title, desc }) => (
               <Link key={to} to={to} className="link-card">

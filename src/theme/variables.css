@@ -45,6 +45,10 @@
 
   /* Fuente */
   --ion-font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+
+  /* Homogeneidad: border radius en toda la app */
+  --app-radius: 12px;
+  --app-radius-sm: 8px;
 }
 
 /* Barra de navegación siempre arriba (web común) */
@@ -81,21 +85,25 @@ ion-tab-bar.nav-tabs ion-tab-button.tab-selected {
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 var(--app-radius) var(--app-radius);
   }
 }
 
-/* Campos de formulario: label arriba, input abajo con espacio */
+/* Campos de formulario: label sin fondo (fusionado con bg app), input abajo con espacio */
 .form-field {
   margin-bottom: 1.25rem;
+  background: transparent;
 }
 
-.form-field__label {
+.form-field__label,
+.form-field label {
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--ion-text-color);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
+  padding: 0;
+  background: transparent;
 }
 
 .form-field ion-input,
@@ -105,7 +113,7 @@ ion-tab-bar.nav-tabs ion-tab-button.tab-selected {
   --padding-top: 12px;
   --padding-bottom: 12px;
   --background: #ffffff;
-  border-radius: 10px;
+  border-radius: var(--app-radius);
   border: 1px solid rgba(0, 0, 0, 0.12);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   min-height: 48px;
@@ -141,12 +149,13 @@ ion-item.form-field-stacked .item-inner {
 }
 
 ion-item.form-field-stacked ion-label {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
   font-size: 0.875rem;
   font-weight: 500;
   transform: none;
   flex: none;
   max-width: 100%;
+  background: transparent;
 }
 
 ion-item.form-field-stacked ion-input,
@@ -155,7 +164,7 @@ ion-item.form-field-stacked ion-select {
   --padding-end: 14px;
   --padding-top: 12px;
   --padding-bottom: 12px;
-  border-radius: 10px;
+  border-radius: var(--app-radius);
   border: 1px solid rgba(0, 0, 0, 0.12);
   background: #ffffff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -168,17 +177,9 @@ ion-item.form-field-stacked ion-select {
   min-height: 48px;
 }
 
-/* Form field con div (label + input separados) */
+/* Evitar encimar: más espacio entre campos */
 .form-field + .form-field {
   margin-top: 1.25rem;
-}
-
-.form-field label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--ion-text-color);
-  margin-bottom: 0.5rem;
 }
 
 .form-field ion-input,
@@ -187,7 +188,7 @@ ion-item.form-field-stacked ion-select {
   --padding-end: 14px;
   --padding-top: 12px;
   --padding-bottom: 12px;
-  border-radius: 10px;
+  border-radius: var(--app-radius);
   border: 1px solid rgba(0, 0, 0, 0.12);
   background: #ffffff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -203,6 +204,12 @@ ion-item.form-field-stacked ion-select {
   font-size: 0.95rem;
   color: var(--ion-text-color);
   opacity: 0.9;
+  background: transparent;
+}
+
+/* Contenido con fondo de la app (no blanco) */
+ion-content {
+  --background: var(--ion-background-color);
 }
 
 .form-options {
@@ -217,9 +224,9 @@ ion-item.form-field-stacked ion-select {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--ion-color-primary);
-  background: #fff;
+  background: var(--ion-background-color);
   border: 1px solid rgba(30, 95, 186, 0.3);
-  border-radius: 8px;
+  border-radius: var(--app-radius-sm);
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
 }
@@ -241,6 +248,15 @@ ion-toolbar {
   --border-color: transparent;
 }
 
+/* Título de página centrado en la barra (no pegado al botón Inicio) */
+ion-toolbar ion-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+}
+
 /* Botón Inicio en toolbar: visible sobre fondo azul */
 .toolbar-home-btn {
   --color: var(--ion-color-primary-contrast);
@@ -248,9 +264,9 @@ ion-toolbar {
   margin-left: 4px;
 }
 
-/* Cards con un poco más de personalidad */
+/* Cards: mismo radius que el resto de la app */
 ion-card {
-  border-radius: 12px;
+  border-radius: var(--app-radius);
   box-shadow: 0 2px 8px rgba(30, 95, 186, 0.08);
 }
 
@@ -263,7 +279,7 @@ ion-card-content {
   display: block;
   text-decoration: none;
   color: inherit;
-  border-radius: 12px;
+  border-radius: var(--app-radius);
   padding: 16px 20px;
   margin-bottom: 12px;
   background: var(--ion-card-background);
@@ -292,19 +308,20 @@ ion-card-content {
   opacity: 0.85;
 }
 
-/* Títulos de página */
-ion-content h1 {
+/* Título principal en Home (sin toolbar) */
+.home-title {
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--ion-text-color);
-  margin: 0 0 8px;
+  margin: 0 0 0.5rem;
 }
 
-ion-content h1 + p {
+/* Intro/descripción bajo el contenido (sin h1, títulos en header) */
+ion-content .content-intro {
   color: var(--ion-text-color);
-  opacity: 0.8;
+  opacity: 0.85;
   font-size: 0.95rem;
-  margin-bottom: 24px;
+  margin: 0 0 1.25rem;
 }
 
 /* Ajuste general del body */

@@ -26,7 +26,7 @@ const TIPOS_MOSTRAR = [
 
 const CuantoVale = () => {
   usePageTitle('Cuánto vale en pesos', 'Precio en dólares a pesos: blue, MEP, con tarjeta.')
-  const { loading, error, getByTipo, minutosDesdeActualizacion } = useCotizacion()
+  const { loading, error, getByTipo, actualizadoHaceTexto } = useCotizacion()
   const [usd, setUsd] = useState<string>('')
 
   const numUsd = useMemo(() => {
@@ -51,8 +51,7 @@ const CuantoVale = () => {
       </IonHeader>
       <IonContent className="ion-padding">
         <div className="content-wrap">
-        <h1>Cuánto vale en pesos</h1>
-        <p>Ingresá un precio en dólares y ves el equivalente en pesos (blue, MEP, tarjeta).</p>
+        <p className="content-intro">Ingresá un precio en dólares y ves el equivalente en pesos (blue, MEP, tarjeta).</p>
 
         <div className="form-field">
           <label>Precio en USD</label>
@@ -88,9 +87,9 @@ const CuantoVale = () => {
           </IonCard>
         )}
 
-        {minutosDesdeActualizacion() !== null && (
+        {actualizadoHaceTexto() && (
           <IonNote className="ion-margin-top">
-            Cotización actualizada hace {minutosDesdeActualizacion()} min
+            Cotización actualizada hace {actualizadoHaceTexto()}
           </IonNote>
         )}
         </div>

@@ -22,7 +22,7 @@ import { getVenta } from '../services/cotizacion'
 
 const Dolar = () => {
   usePageTitle('Dólar blue hoy', 'Convertir dólares a pesos. Cotización blue, MEP, CCL, oficial.')
-  const { dolares, loading, error, getByTipo, minutosDesdeActualizacion } = useCotizacion()
+  const { dolares, loading, error, getByTipo, actualizadoHaceTexto } = useCotizacion()
   const [tipo, setTipo] = useState<TipoDolar>('blue')
   const [monto, setMonto] = useState<string>('')
   const [esArs, setEsArs] = useState<boolean>(true) // true = input en ARS, false = input en USD
@@ -49,13 +49,11 @@ const Dolar = () => {
               ← Inicio
             </IonButton>
           </IonButtons>
-          <IonTitle>Dólar</IonTitle>
+          <IonTitle>Cotizador dólar</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
         <div className="content-wrap">
-        <h1>Cotizador dólar</h1>
-
         <div className="form-field">
           <label>Tipo</label>
           <IonSelect
@@ -106,9 +104,9 @@ const Dolar = () => {
           </>
         )}
 
-        {minutosDesdeActualizacion() !== null && (
+        {actualizadoHaceTexto() && (
           <IonNote className="ion-margin-top">
-            Actualizado hace {minutosDesdeActualizacion()} min
+            Actualizado hace {actualizadoHaceTexto()}
           </IonNote>
         )}
         </div>

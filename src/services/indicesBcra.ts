@@ -72,7 +72,21 @@ export async function fetchIcl(desde?: string, hasta?: string, limit = 365): Pro
   return Array.isArray(fallback) ? fallback : []
 }
 
+/** Última fecha disponible en la serie (YYYY-MM-DD). No usar ICL para fechas posteriores. */
+export function getUltimaFechaIcl(detalle: IclDetalle[]): string | null {
+  if (detalle.length === 0) return null
+  const max = detalle.reduce((m, d) => (d.fecha > m ? d.fecha : m), detalle[0].fecha)
+  return max
+}
+
+/**
+ * ICL para una fecha. Si la fecha es futura (posterior al último dato del BCRA), retorna null:
+ * no se puede “adivinar” el ICL futuro, y usar el último daría factor 1 (aumento = 0) incorrecto.
+ */
 export function getIclEnFecha(detalle: IclDetalle[], fecha: string): number | null {
+  if (detalle.length === 0) return null
+  const ultimaFecha = getUltimaFechaIcl(detalle)!
+  if (fecha.slice(0, 7) > ultimaFecha.slice(0, 7)) return null
   const target = fecha.slice(0, 7)
   const exact = detalle.find((d) => d.fecha.slice(0, 10) === fecha.slice(0, 10))
   if (exact) return exact.valor

@@ -47,13 +47,12 @@ const Alquiler = () => {
               ← Inicio
             </IonButton>
           </IonButtons>
-          <IonTitle>Alquiler</IonTitle>
+          <IonTitle>Calculadora de alquiler</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
         <div className="content-wrap">
-        <h1>Calculadora de alquiler</h1>
-        <p>Ingresos mensuales y % que podés destinar al alquiler. Te mostramos el máximo a pagar y cuánto te queda.</p>
+        <p className="content-intro">Ingresos mensuales y % que podés destinar al alquiler. Te mostramos el máximo a pagar y cuánto te queda.</p>
 
         <div className="form-field">
           <label>Ingresos mensuales (ARS)</label>

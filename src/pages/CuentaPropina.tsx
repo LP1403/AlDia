@@ -68,13 +68,11 @@ const CuentaPropina = () => {
               ← Inicio
             </IonButton>
           </IonButtons>
-          <IonTitle>Cuenta / Propina</IonTitle>
+          <IonTitle>Dividir cuenta / Propina</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
         <div className="content-wrap">
-        <h1>Dividir cuenta / Propina</h1>
-
         <IonSegment value={modo} onIonChange={(e) => setModo(e.detail.value as ModoCuenta)}>
           <IonSegmentButton value="cuenta">
             <IonLabel>Dividir cuenta</IonLabel>
